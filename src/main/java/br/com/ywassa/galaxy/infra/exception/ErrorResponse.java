@@ -1,4 +1,4 @@
-package br.com.ywassa.galaxy.infra;
+package br.com.ywassa.galaxy.infra.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
