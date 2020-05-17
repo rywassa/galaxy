@@ -49,18 +49,13 @@ public class WeatherService {
 	@Transactional
 	public StatisticDTO forecastForTenYears() {
 		final Galaxy galaxy = galaxyService.findById(GALAXY_ID);
-		final Long day = galaxy.getDay();
-		final LocalDate now = LocalDate.now();
-		final LocalDate from = now.plusDays(day);
+		final LocalDate originDate = galaxy.getOriginDate();
+		final LocalDate from = originDate.plusDays(galaxy.getDay());
 		final LocalDate to = from.plusYears(TEN_YEARS);
-		return calculateForecast(galaxy, from, to);
+		return calculateForecast(galaxy, to.toEpochDay() - from.toEpochDay());
 	}
 
-	public StatisticDTO calculateForecast(final Galaxy galaxy, final LocalDate from, final LocalDate to) {
-		if (from.isAfter(to)) {
-			throw new IllegalArgumentException();
-		}
-
+	private StatisticDTO calculateForecast(final Galaxy galaxy, final Long toDay) {
 		final Planet planetA = galaxy.getPlanetOne();
 		final Planet planetB = galaxy.getPlanetTwo();
 		final Planet planetC = galaxy.getPlanetThree();
@@ -77,11 +72,10 @@ public class WeatherService {
 		double lastAngleInRadB = planetB.getLastAngleInRad().doubleValue();
 		double lastAngleInRadC = planetC.getLastAngleInRad().doubleValue();
 
-		final long totalDays = to.toEpochDay() - from.toEpochDay() + 1;
 		double maxPerimeter = Double.MIN_VALUE;
 		final ForecastResponse response = new ForecastResponse();
-		for (long i = 0; i < totalDays; i++) {
-			final long day = i + 1;
+		final long total = galaxy.getDay() + toDay;
+		for (long i = galaxy.getDay(); i <= total; i++) {
 			final double angleA = lastAngleInRadA;
 			final double angleB = lastAngleInRadB;
 			final double angleC = lastAngleInRadC;
@@ -90,21 +84,22 @@ public class WeatherService {
 			final Point pointC = Point.of(angleC, distanceInKmC);
 			final Line line = new Line(pointA, pointB);
 
+			galaxy.setDay(galaxy.getDay() + 1);
 			if (line.isAligned(pointC)) {
 				response.addWeather(line.isAligned(POINT_SUN) ?
-						new Weather(day, Forecast.DRY, galaxy) :
-						new Weather(day, Forecast.EXCELLENT, galaxy));
+						new Weather(galaxy.getDay(), Forecast.DRY, galaxy) :
+						new Weather(galaxy.getDay(), Forecast.EXCELLENT, galaxy));
 			} else {
 				final Triangle triangle = new Triangle(pointA, pointB, pointC);
 				final double perimeter = triangle.perimeter();
 				if (triangle.contains(POINT_SUN)) {
-					response.addWeather(new Weather(day, Forecast.RAIN, galaxy));
+					response.addWeather(new Weather(galaxy.getDay(), Forecast.RAIN, galaxy));
 					if (perimeter > maxPerimeter) {
 						maxPerimeter = perimeter;
-						response.setMaxRainDay(day);
+						response.setMaxRainDay(galaxy.getDay());
 					}
 				} else {
-					response.addWeather(new Weather(day, Forecast.REGULAR, galaxy));
+					response.addWeather(new Weather(galaxy.getDay(), Forecast.REGULAR, galaxy));
 				}
 			}
 
@@ -112,7 +107,6 @@ public class WeatherService {
 			lastAngleInRadB = CircularMotionCalculator.newAngle(angularSpeedInRadB, angleB);
 			lastAngleInRadC = CircularMotionCalculator.newAngle(angularSpeedInRadC, angleC);
 		}
-
 		planetA.setLastAngleInRad(BigDecimal.valueOf(lastAngleInRadA));
 		planetB.setLastAngleInRad(BigDecimal.valueOf(lastAngleInRadB));
 		planetC.setLastAngleInRad(BigDecimal.valueOf(lastAngleInRadC));

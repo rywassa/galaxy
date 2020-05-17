@@ -11,6 +11,7 @@ create table if not exists planet (
 create table if not exists galaxy (
 	id serial,
 	name varchar(255) not null,
+	origin_date date not null,
 	day bigint not null,
 	planet_one_id bigint not null,
 	planet_two_id bigint not null,
@@ -30,8 +31,10 @@ create table if not exists weather (
 	constraint weather_galaxy_fk foreign key (galaxy_id) references galaxy(id)
 );
 
+create unique index if not exists weather_galaxy_id_day_uk on weather(galaxy_id, day);
+
 insert into planet(id, name, angular_speed_in_degree_by_day, clockwise, distance_in_km, last_angle_in_rad) values(1, 'Ferengi', 1, true, 500, 0);
 insert into planet(id, name, angular_speed_in_degree_by_day, clockwise, distance_in_km, last_angle_in_rad) values(2, 'Betasoide', 3, true, 2000, 0);
 insert into planet(id, name, angular_speed_in_degree_by_day, clockwise, distance_in_km, last_angle_in_rad) values(3, 'Vulcano', 5, false, 1000, 0);
 
-insert into galaxy(id, name, day, planet_one_id, planet_two_id, planet_three_id) values(1, 'Galaxy M', 0, 1, 2, 3);
+insert into galaxy(id, name, origin_date, day, planet_one_id, planet_two_id, planet_three_id) values(1, 'Galaxy M', '2020-05-17', 0, 1, 2, 3);

@@ -8,12 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 
 @Entity
 @Getter
+@Table(name = "weather", uniqueConstraints = {
+		@UniqueConstraint(name = "weather_galaxy_id_day_uk", columnNames = {"galaxy_id", "day"})
+})
 public class Weather {
 
 	@Id

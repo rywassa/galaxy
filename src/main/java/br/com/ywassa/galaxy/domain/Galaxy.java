@@ -1,5 +1,7 @@
 package br.com.ywassa.galaxy.domain;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +27,9 @@ public class Galaxy {
 	@NotNull
 	@Size(max = 255)
 	private String name;
+
+	@NotNull
+	private LocalDate originDate;
 
 	@NotNull
 	private Long day;
