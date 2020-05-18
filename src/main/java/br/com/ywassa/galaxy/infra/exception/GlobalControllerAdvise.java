@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import br.com.ywassa.galaxy.exception.DataNotFoundException;
+
 @RestControllerAdvice
 public class GlobalControllerAdvise {
 
@@ -14,6 +16,12 @@ public class GlobalControllerAdvise {
 	public ResponseEntity<ErrorResponse> handleServerError(final AbstractBusinessException be) {
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
 				.body(new ErrorResponse(be.getMessage()));
+	}
+
+	@ExceptionHandler({DataNotFoundException.class})
+	public ResponseEntity<ErrorResponse> handleServerError(final DataNotFoundException dnfe) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND)
+				.body(new ErrorResponse(dnfe.getMessage()));
 	}
 
 	@ExceptionHandler({IllegalArgumentException.class})

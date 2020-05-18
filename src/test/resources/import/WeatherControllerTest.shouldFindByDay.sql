@@ -1,0 +1,1 @@
+insert into weather ("day", forecast, galaxy_id) values(1, 'DRY', 1);
