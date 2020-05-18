@@ -17,8 +17,8 @@ public class ForecastJob implements Job {
 
 	@Override
 	public void execute(final JobExecutionContext jobExecutionContext) {
-		log.info("ForecastJob Start................");
+		log.info("Forecast Job Started");
 		weatherService.forecastForTenYears();
-		log.info("ForecastJob End................");
+		log.info("Forecast Job Ended");
 	}
 }

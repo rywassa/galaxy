@@ -23,6 +23,8 @@
 
 		<spring.cloud.version>Hoxton.SR3</spring.cloud.version>
 		<junit.jupiter.version>1.14.1</junit.jupiter.version>
+		<spring.cloud.gcp.starter.sql.postgresql.version>1.2.2.RELEASE
+		</spring.cloud.gcp.starter.sql.postgresql.version>
 	</properties>
 
 	<dependencyManagement>
@@ -36,30 +38,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<profiles>
-		<profile>
-			<id>production</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<dependencies>
-				<!-- Google Cloud Plataform -->
-				<dependency>
-					<groupId>org.springframework.cloud</groupId>
-					<artifactId>spring-cloud-gcp-starter</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>org.springframework.cloud</groupId>
-					<artifactId>spring-cloud-gcp-starter-sql-postgresql</artifactId>
-					<version>1.2.2.RELEASE</version>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>dev</id>
-		</profile>
-	</profiles>
 
 	<dependencies>
 		<dependency>
@@ -114,6 +92,17 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-quartz</artifactId>
+		</dependency>
+
+		<!-- Google Cloud Plataform -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-gcp-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-gcp-starter-sql-postgresql</artifactId>
+			<version>${spring.cloud.gcp.starter.sql.postgresql.version}</version>
 		</dependency>
 
 		<!-- TestContainers -->
