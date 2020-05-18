@@ -1,0 +1,5 @@
+cron:
+- description: "Waking up Service"
+  url: /api/v1/weather?day=1
+  schedule: every 1 minutes from 22:55 to 23:05
+  timezone: America/Sao_Paulo
