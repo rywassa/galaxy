@@ -1,5 +1,17 @@
 # Desafio da Galáxia M
 
+![image](https://user-images.githubusercontent.com/2258146/82340038-282f0a80-99c5-11ea-98eb-f97381195f7d.png)
+
+## Demo
+
+[Documentação](https://galaxy-277418.uc.r.appspot.com/swagger-ui.html)
+
+[Github](https://github.com/rywassa/galaxy)
+
+[Codebeat](https://codebeat.co/projects/github-com-rywassa-galaxy-master)
+
+# Problema
+
 Em uma galáxia distante, existem três civilizações. Vulcanos, Ferengis e Betasoides. Cada a civilização vive em paz em seu respectivo planeta.
 
 Eles dominam a previsão do clima usando um sistema computacional. Abaixo do diagrama do sistema solar.
@@ -40,6 +52,7 @@ Execute um programa de computador para poder prever nos próximos 10 anos:
 * [Flywaydb](https://flywaydb.org/documentation/)
 * [Springfox-swagger2](https://springfox.github.io/springfox/docs/current/)
 * [Quartz](http://www.quartz-scheduler.org/documentation/)
+* [Lombok](https://projectlombok.org/)
 * [TestContainer](https://www.testcontainers.org/)
 
 ### Plataforma de execução
@@ -68,12 +81,14 @@ Existem 2 profiles spring
 java -Dspring.profiles.active=dev -jar galaxy-0.0.1-SNAPSHOT.jar
 ```
 
-### Deploy no GCP AppEngine
+#### Ambiente do AppEngine
+
+##### Deploy no GCP AppEngine
 ```
 mvn clean package appengine:deploy
 ``` 
 
-### Deploy do GCP AppEngine Cron
+##### Deploy do GCP AppEngine Cron
 ```
 gcloud app deploy ./src/main/appengine/cron.yaml
 ```
