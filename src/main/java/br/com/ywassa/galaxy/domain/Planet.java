@@ -36,20 +36,4 @@ public class Planet {
 	@NotNull
 	private BigDecimal lastAngleInRad;
 
-	protected Planet() {
-	}
-
-	public Planet(final Long id,
-				  final String name,
-				  final double angularSpeedInDegreeByDay,
-				  final boolean clockwise,
-				  final double distanceInKm,
-				  final BigDecimal lastAngleInRad) {
-		this.id = id;
-		this.name = name;
-		this.angularSpeedInDegreeByDay = BigDecimal.valueOf(angularSpeedInDegreeByDay);
-		this.clockwise = clockwise;
-		this.distanceInKm = BigDecimal.valueOf(distanceInKm);
-		this.lastAngleInRad = lastAngleInRad;
-	}
 }

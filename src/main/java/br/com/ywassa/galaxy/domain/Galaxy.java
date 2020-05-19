@@ -48,4 +48,8 @@ public class Galaxy {
 	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "planet_three_id")
 	private Planet planetThree;
+
+	public void plusOneDay() {
+		this.day++;
+	}
 }

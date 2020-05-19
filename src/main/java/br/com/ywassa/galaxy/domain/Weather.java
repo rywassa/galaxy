@@ -13,12 +13,14 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @Table(name = "weather", uniqueConstraints = {
 		@UniqueConstraint(name = "weather_galaxy_id_day_uk", columnNames = {"galaxy_id", "day"})
 })
+@NoArgsConstructor
 public class Weather {
 
 	@Id
@@ -36,9 +38,6 @@ public class Weather {
 	@ManyToOne
 	@JoinColumn(name = "galaxy_id")
 	private Galaxy galaxy;
-
-	Weather() {
-	}
 
 	public Weather(final Long day, final Forecast forecast, final Galaxy galaxy) {
 		this.day = day;

@@ -84,7 +84,7 @@ public class WeatherService {
 			final Point pointC = Point.of(angleC, distanceInKmC);
 			final Line line = new Line(pointA, pointB);
 
-			galaxy.setDay(galaxy.getDay() + 1);
+			galaxy.plusOneDay();
 			if (line.isAligned(pointC)) {
 				response.addWeather(line.isAligned(POINT_SUN) ?
 						new Weather(galaxy.getDay(), Forecast.DRY, galaxy) :
