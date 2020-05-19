@@ -9,6 +9,8 @@ public class CircularMotionCalculatorTest {
 	@Test
 	public void shouldCalculateAngle() {
 		assertTrue(DoubleComparator.equals(CircularMotionCalculator.newAngle(0, 0), 0));
+		assertTrue(DoubleComparator.equals(CircularMotionCalculator.newAngle(10, 0), 10));
+		assertTrue(DoubleComparator.equals(CircularMotionCalculator.newAngle(50, Math.PI), Math.PI + 50));
 	}
 
 	@Test

@@ -25,4 +25,24 @@ public class LineTest {
 		final Line line = new Line(a, b);
 		assertTrue(line.isAligned(c));
 	}
+
+	@Test
+	public void shouldAlignedIn90degree() {
+		final Point a = new Point(0.0,0.0);
+		final Point b = new Point(0.0,1.0);
+		final Point c = new Point(0.0,2.0);
+
+		final Line line = new Line(a, b);
+		assertTrue(line.isAligned(c));
+	}
+
+	@Test
+	public void shouldAlignedIn135degree() {
+		final Point a = new Point(0.0,0.0);
+		final Point b = new Point(-1.0,1.0);
+		final Point c = new Point(-2.0,2.0);
+
+		final Line line = new Line(a, b);
+		assertTrue(line.isAligned(c));
+	}
 }

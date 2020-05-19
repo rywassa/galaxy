@@ -19,6 +19,17 @@ public class TriangleTest {
 	}
 
 	@Test
+	public void shouldContainPointAtBorder() {
+		final Point a = new Point(1.0, 1.0);
+		final Point b = new Point(5.0, 5.0);
+		final Point c = new Point(5.0, 1.0);
+		final Point d = new Point(2.0, 2.0);
+
+		final Triangle triangle = new Triangle(a, b, c);
+		assertTrue(triangle.contains(d));
+	}
+
+	@Test
 	public void shouldNotContain() {
 		final Point a = new Point(1.0, 1.0);
 		final Point b = new Point(5.0, 5.0);
