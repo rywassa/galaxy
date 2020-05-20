@@ -75,7 +75,7 @@ public class WeatherService {
 		double maxPerimeter = Double.MIN_VALUE;
 		final ForecastResponse response = new ForecastResponse();
 		final long total = galaxy.getDay() + toDay;
-		for (long i = galaxy.getDay(); i <= total; i++) {
+		for (long i = galaxy.getDay(); i < total; i++) {
 			final double angleA = lastAngleInRadA;
 			final double angleB = lastAngleInRadB;
 			final double angleC = lastAngleInRadC;

@@ -85,6 +85,6 @@ public class WeatherControllerTest extends AbstractIntegrationTest {
 		assertEquals(2L, statistic.getExcellentDays());
 		assertEquals(1189L, statistic.getRainDays());
 		assertEquals(2953L, statistic.getMaxRainDay());
-		assertEquals(2451, statistic.getRegularDay());
+		assertEquals(2450, statistic.getRegularDay());
 	}
 }
